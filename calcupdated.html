@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- PRIMARY SEO TAGS -->
+<title>Price Ladder Calculator for Binance | Free Crypto Trading Tool</title>
+<meta name="description" content="Free Price Ladder Calculator for Binance traders. Calculate buy/sell fees, profit and profit percentage across multiple price levels instantly. No registration needed.">
+<meta name="keywords" content="binance calculator, price ladder calculator, crypto profit calculator, binance fee calculator, crypto trading tool, buy sell calculator, binance trading, cryptocurrency calculator">
+<meta name="author" content="Price Ladder Calculator">
+<meta name="robots" content="index, follow">
+<meta name="language" content="English">
+<meta name="revisit-after" content="7 days">
+
+<!-- OPEN GRAPH (Facebook, Telegram sharing) -->
+<meta property="og:title" content="Price Ladder Calculator for Binance | Free Crypto Tool">
+<meta property="og:description" content="Calculate your crypto trading profit across multiple price levels with fees included. Free tool for Binance traders.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://binance-price-ladder.netlify.app">
+<meta property="og:image" content="https://binance-price-ladder.netlify.app/preview.png">
+<meta property="og:site_name" content="Price Ladder Calculator">
+
+<!-- TWITTER CARD (Twitter/X sharing) -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Price Ladder Calculator for Binance">
+<meta name="twitter:description" content="Free tool to calculate crypto trading profit across price levels with Binance fees.">
+<meta name="twitter:image" content="https://binance-price-ladder.netlify.app/preview.png">
+
+<!-- GOOGLE SITE VERIFICATION (paste your code here after getting it from Google Search Console) -->
+<!-- <meta name="google-site-verification" content="PASTE_YOUR_CODE_HERE"> -->
+
+<!-- CANONICAL URL -->
+<link rel="canonical" href="https://binance-price-ladder.netlify.app">
+
+<!-- FAVICON -->
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📊</text></svg>">
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #0b0e11;
+    color: #eaecef;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 15px;
+    min-height: 100vh;
+}
+
+.card {
+    background-color: #1e2329;
+    padding: 20px;
+    width: 100%;
+    max-width: 700px;
+    border-radius: 12px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.6);
+}
+
+h1 {
+    text-align: center;
+    color: #f0b90b;
+    margin-bottom: 5px;
+    font-size: 22px;
+}
+
+.subtitle {
+    text-align: center;
+    color: #848e9c;
+    font-size: 13px;
+    margin-bottom: 20px;
+}
+
+h2 {
+    text-align: center;
+    color: #f0b90b;
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    margin-top: 12px;
+    color: #848e9c;
+    font-size: 13px;
+}
+
+input, select, button {
+    width: 100%;
+    padding: 10px;
+    margin-top: 6px;
+    border-radius: 6px;
+    border: 1px solid #2b3139;
+    background-color: #0b0e11;
+    color: #eaecef;
+    font-size: 15px;
+}
+
+input:focus, select:focus {
+    outline: none;
+    border-color: #f0b90b;
+}
+
+button {
+    background-color: #f0b90b;
+    border: none;
+    font-weight: bold;
+    margin-top: 15px;
+    cursor: pointer;
+    color: #0b0e11;
+    font-size: 16px;
+    border-radius: 8px;
+    transition: opacity 0.2s;
+}
+
+button:hover {
+    opacity: 0.85;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    overflow-x: auto;
+    display: block;
+}
+
+th, td {
+    padding: 7px 5px;
+    text-align: center;
+    border: 1px solid #2b3139;
+    font-size: 12px;
+    white-space: nowrap;
+}
+
+th {
+    background-color: #14181c;
+    color: #f0b90b;
+    font-size: 11px;
+}
+
+.green {
+    color: #0ecb81;
+    font-weight: bold;
+}
+
+.red {
+    color: #f6465d;
+    font-weight: bold;
+}
+
+.base-price {
+    background-color: #33393f;
+}
+
+.base-price td {
+    font-weight: bold;
+}
+
+/* INFO SECTION FOR SEO */
+.info-section {
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid #2b3139;
+}
+
+.info-section h2 {
+    color: #f0b90b;
+    font-size: 16px;
+    text-align: left;
+    margin-bottom: 10px;
+}
+
+.info-section p {
+    color: #848e9c;
+    font-size: 13px;
+    line-height: 1.7;
+    margin-bottom: 10px;
+}
+
+.info-section ul {
+    color: #848e9c;
+    font-size: 13px;
+    line-height: 2;
+    padding-left: 20px;
+}
+
+/* FOOTER */
+footer {
+    margin-top: 20px;
+    text-align: center;
+    color: #848e9c;
+    font-size: 12px;
+    padding: 10px;
+}
+
+/* STATS BAR */
+.stats-bar {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 15px;
+    margin-bottom: 5px;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.stat-item {
+    background-color: #14181c;
+    padding: 8px 15px;
+    border-radius: 8px;
+    text-align: center;
+    flex: 1;
+    min-width: 120px;
+}
+
+.stat-label {
+    font-size: 11px;
+    color: #848e9c;
+}
+
+.stat-value {
+    font-size: 14px;
+    font-weight: bold;
+    color: #f0b90b;
+    margin-top: 3px;
+}
+
+/* RESPONSIVE */
+@media (max-width: 500px) {
+    h1 {
+        font-size: 18px;
+    }
+    th, td {
+        font-size: 10px;
+        padding: 5px 3px;
+    }
+}
+</style>
+</head>
+<body>
+
+<!-- STRUCTURED DATA FOR GOOGLE (JSON-LD) -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Price Ladder Calculator for Binance",
+  "description": "Free Price Ladder Calculator for Binance traders. Calculate buy/sell fees, profit and profit percentage across multiple price levels instantly.",
+  "url": "https://binance-price-ladder.netlify.app",
+  "applicationCategory": "FinanceApplication",
+  "operatingSystem": "Any",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "featureList": [
+    "Price ladder generation",
+    "Binance fee calculation",
+    "Profit calculation",
+    "Profit percentage calculation",
+    "Multiple step sizes"
+  ]
+}
+</script>
+
+<div class="card">
+
+    <!-- MAIN HEADING (important for SEO) -->
+    <h1>📊 Price Ladder Calculator for Binance</h1>
+    <p class="subtitle">Calculate profit & fees across multiple price levels — Free & Instant</p>
+
+    <!-- INPUT FIELDS -->
+    <label>Base Buy Price</label>
+    <input id="basePrice" type="number" step="any" placeholder="e.g. 0.0523">
+
+    <label>Buy Amount (Coin)</label>
+    <input id="buyAmount" type="number" step="any" placeholder="e.g. 1000">
+
+    <label>Sell Price</label>
+    <input id="sellPrice" type="number" step="any" placeholder="e.g. 0.0530">
+
+    <label>Step Selector</label>
+    <select id="stepSelector">
+        <option value="100">1 = ±100</option>
+        <option value="10">2 = ±10</option>
+        <option value="1">3 = ±1</option>
+        <option value="0.1">4 = ±0.1</option>
+        <option value="0.01">5 = ±0.01</option>
+        <option value="0.001">6 = ±0.001</option>
+        <option value="0.0001" selected>7 = ±0.0001</option>
+        <option value="0.00001">8 = ±0.00001</option>
+        <option value="0.000001">9 = ±0.000001</option>
+        <option value="0.0000001">10 = ±0.0000001</option>
+    </select>
+
+    <button onclick="generateLadder()">🔢 Generate Ladder</button>
+
+    <!-- STATS BAR (shows after calculation) -->
+    <div id="statsBar" style="display:none;">
+        <div class="stats-bar">
+            <div class="stat-item">
+                <div class="stat-label">Base Price</div>
+                <div class="stat-value" id="statBasePrice">-</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-label">Sell Price</div>
+                <div class="stat-value" id="statSellPrice">-</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-label">Max Profit</div>
+                <div class="stat-value green" id="statMaxProfit">-</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-label">Binance Fee</div>
+                <div class="stat-value" id="statFee">0.075%</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- RESULT TABLE -->
+    <div id="resultTable"></div>
+
+    <!-- SEO INFO SECTION -->
+    <div class="info-section">
+        <h2>What is a Price Ladder Calculator?</h2>
+        <p>
+            A <strong>Price Ladder Calculator</strong> helps Binance traders visualize 
+            profit and loss across a range of buy prices. Instead of calculating one 
+            price at a time, you can see 21 price levels at once — 10 above and 10 below 
+            your base buy price.
+        </p>
+
+        <h2>How to Use This Tool</h2>
+        <ul>
+            <li>Enter your <strong>Base Buy Price</strong> — the price you plan to buy at</li>
+            <li>Enter your <strong>Buy Amount</strong> — how many coins you are buying</li>
+            <li>Enter your <strong>Sell Price</strong> — the price you plan to sell at</li>
+            <li>Select a <strong>Step Size</strong> — controls price intervals in the ladder</li>
+            <li>Click <strong>Generate Ladder</strong> to see your profit table</li>
+        </ul>
+
+        <h2>Binance Fee Included</h2>
+        <p>
+            This calculator automatically includes the standard 
+            <strong>Binance trading fee of 0.075%</strong> for both buy and sell orders, 
+            giving you accurate net profit results.
+        </p>
+
+        <h2>Who Is This For?</h2>
+        <p>
+            This tool is perfect for <strong>Binance spot traders</strong>, 
+            <strong>crypto scalpers</strong>, and anyone who wants to plan their 
+            trades more accurately by seeing profit at multiple price points before placing an order.
+        </p>
+    </div>
+
+</div>
+
+<!-- FOOTER -->
+<footer>
+    <p>© 2025 Price Ladder Calculator for Binance · Free Crypto Trading Tool · No Registration Required</p>
+    <p style="margin-top:5px;">
+        <a href="#" style="color:#f0b90b; text-decoration:none;">Home</a> · 
+        <a href="https://www.binance.com" target="_blank" style="color:#f0b90b; text-decoration:none;">Binance</a>
+    </p>
+</footer>
+
+<script>
+function generateLadder() {
+    const basePrice = parseFloat(document.getElementById('basePrice').value);
+    const buyAmount = parseFloat(document.getElementById('buyAmount').value);
+    const sellPrice = parseFloat(document.getElementById('sellPrice').value);
+    const step = parseFloat(document.getElementById('stepSelector').value);
+    const feeRate = 0.00075;
+
+    if (isNaN(basePrice) || isNaN(buyAmount) || isNaN(sellPrice)) {
+        alert("⚠️ Please enter all values before generating the ladder.");
+        return;
+    }
+
+    if (basePrice <= 0 || buyAmount <= 0 || sellPrice <= 0) {
+        alert("⚠️ All values must be greater than zero.");
+        return;
+    }
+
+    // Price ladder: ±10 steps above and below base price
+    const ladder = [];
+    for (let i = 10; i >= 1; i--) ladder.push(basePrice - i * step);
+    ladder.push(basePrice);
+    for (let i = 1; i <= 10; i++) ladder.push(basePrice + i * step);
+
+    // Find best profit for stats bar
+    let maxProfit = -Infinity;
+
+    // Build table
+    let html = `
+    <table>
+    <thead>
+        <tr>
+            <th>Buy Price</th>
+            <th>Buy Fee<br>(Coin)</th>
+            <th>Sell Fee<br>(USDT)</th>
+            <th>Total Buy<br>(USDT)</th>
+            <th>Total Sell<br>(USDT)</th>
+            <th>Profit<br>(USDT)</th>
+            <th>Profit %</th>
+        </tr>
+    </thead>
+    <tbody>`;
+
+    ladder.forEach(price => {
+        const buyFee = buyAmount * feeRate;
+        const sellAmount = buyAmount - buyFee;
+        const sellFee = sellAmount * sellPrice * feeRate;
+        const totalBuy = price * buyAmount;
+        const totalSell = (sellPrice * sellAmount) - sellFee;
+        const profit = totalSell - totalBuy;
+        const profitPercent = (profit / totalBuy) * 100;
+
+        if (profit > maxProfit) maxProfit = profit;
+
+        const isBase = Math.abs(price - basePrice) < 1e-10;
+
+        // Determine decimal places based on step size
+        let decimals = 7;
+        if (step >= 1) decimals = 2;
+        else if (step >= 0.1) decimals = 3;
+        else if (step >= 0.01) decimals = 4;
+        else if (step >= 0.001) decimals = 5;
+        else if (step >= 0.0001) decimals = 6;
+        else decimals = 8;
+
+        html += `
+        <tr class="${isBase ? 'base-price' : ''}">
+            <td>${price.toFixed(decimals)} ${isBase ? '⭐' : ''}</td>
+            <td>${buyFee.toFixed(6)}</td>
+            <td>${sellFee.toFixed(6)}</td>
+            <td>${totalBuy.toFixed(4)}</td>
+            <td>${totalSell.toFixed(4)}</td>
+            <td class="${profit >= 0 ? 'green' : 'red'}">${profit.toFixed(4)}</td>
+            <td class="${profit >= 0 ? 'green' : 'red'}">${profitPercent.toFixed(2)}%</td>
+        </tr>`;
+    });
+
+    html += `</tbody></table>`;
+    document.getElementById('resultTable').innerHTML = html;
+
+    // Update stats bar
+    document.getElementById('statBasePrice').textContent = basePrice;
+    document.getElementById('statSellPrice').textContent = sellPrice;
+    document.getElementById('statMaxProfit').textContent = maxProfit.toFixed(4) + ' USDT';
+    document.getElementById('statsBar').style.display = 'block';
+
+    // Scroll to result
+    document.getElementById('resultTable').scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+// Allow pressing Enter to generate
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'Enter') generateLadder();
+});
+</script>
+
+</body>
+</html>
